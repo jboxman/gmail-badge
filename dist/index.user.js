@@ -1,11 +1,12 @@
 
 // ==UserScript==
-// @name      Gmail badge
-// @namespace com.edseek
-// @match     https://mail.google.com/.+
-// @version   1.0.0
-// @author    Jason Boxman
-// @grant     none
+// @name        Gmail badge
+// @namespace   com.edseek
+// @description A ViolentMonkey script that displays a badge for unread emails in Gmail. Requires a 'Create shortcut...' style PWA of Gmail to work.
+// @match       https://mail.google.com/*
+// @version     1.0.0
+// @author      Jason Boxman
+// @grant       none
 // ==/UserScript==
 
 (function () {
@@ -49,6 +50,7 @@ function observe(node, callback, options) {
 
 observe(document.head, () => {
   const $el = document.querySelector('title');
+  // https://github.com/developit/gmail-unread-count-badge/blob/main/src/content.js
   let m = String($el.innerText).match(/Inbox(?: \((\d+)\))? -/);
   if (m) navigator.setAppBadge(m[1] | 0 || null);
 });
